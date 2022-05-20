@@ -1,12 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace microservice1.Data
+﻿namespace microservice2.Model
 {
-    public class Student
+    public class StudentModel
     {
-        [Key]
-        public int Id { get; set; }
-
         public string Name { get; set; }
 
         public string Address { get; set; }

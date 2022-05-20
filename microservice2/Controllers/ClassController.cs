@@ -1,4 +1,4 @@
-﻿using microservice1.Data;
+﻿using microservice2.Data;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -7,25 +7,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace microservice1.Controllers
+namespace microservice2.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class StudentController : ControllerBase
+    public class ClassController : ControllerBase
     {
-        private readonly StudentDbContext _context;
+        private readonly ClassDbContext _context;
 
-        public StudentController(StudentDbContext context)
+        public ClassController(ClassDbContext context)
         {
             _context = context;
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Student>>> Get()
+        public async Task<ActionResult<List<Class>>> Get()
         {
-            return Ok(await _context.Students.ToListAsync());
+            return Ok(await _context.Clases.ToListAsync());
         }
-
-     
     }
 }
