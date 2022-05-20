@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ServiceClient1\ServiceClient1.csproj" />
+    <ProjectReference Include="..\ServiceClient2\ServiceClient2.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.32510.428
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "microservice1", "microservice1\microservice1.csproj", "{FE3599BF-68BF-4982-8DC7-D5790597E4EB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "microservice1", "microservice1\microservice1.csproj", "{FE3599BF-68BF-4982-8DC7-D5790597E4EB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "microservice2", "microservice2\microservice2.csproj", "{FBDA449C-F903-4CA5-A6AD-1B870197B3D3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "microservice2", "microservice2\microservice2.csproj", "{FBDA449C-F903-4CA5-A6AD-1B870197B3D3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceClient1", "ServiceClient1\ServiceClient1.csproj", "{F8EDBAC0-625B-48C8-A3F0-38624739DD3A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceClient1", "ServiceClient1\ServiceClient1.csproj", "{F8EDBAC0-625B-48C8-A3F0-38624739DD3A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceClient2", "ServiceClient2\ServiceClient2.csproj", "{D21EC0BC-1C66-4F4C-8032-C6AB99659427}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceClient2", "ServiceClient2\ServiceClient2.csproj", "{D21EC0BC-1C66-4F4C-8032-C6AB99659427}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestSC", "TestSC\TestSC.csproj", "{E950375D-9E8B-444C-8D68-91E853D55491}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{D21EC0BC-1C66-4F4C-8032-C6AB99659427}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D21EC0BC-1C66-4F4C-8032-C6AB99659427}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D21EC0BC-1C66-4F4C-8032-C6AB99659427}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E950375D-9E8B-444C-8D68-91E853D55491}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E950375D-9E8B-444C-8D68-91E853D55491}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E950375D-9E8B-444C-8D68-91E853D55491}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E950375D-9E8B-444C-8D68-91E853D55491}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
