@@ -1,27 +1,18 @@
-﻿using RestSharp;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace ServiceClient2
 {
     public class ClassProcessor
     {
-        public void LoadClass()
+        public async Task LoadClass(int classId = 0)
         {
-            string url = ConfigurationManager.AppSettings["host2"]; // from api microservice1
-
-            var client = new RestClient(url);
-
-            var request = new RestRequest();
-
-            var response = client.Get(request);
-
-            Console.WriteLine(response.Content.ToString());
-
+            // from appsetting.json microservice1 ( http://localhost:11271/api/)
+            string urlService2 = Common.Service();
+            string url = "";
+            if (classId > 0)
+            {
+                url = $"{urlService2}Class/{classId}";
+            }
         }
     }
 }
