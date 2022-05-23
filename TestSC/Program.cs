@@ -1,4 +1,9 @@
 ﻿using System;
+using System.Configuration;
+using Microsoft.Extensions.Options;
+using RestSharp;
+using sclient2;
+using sclient2.Model;
 using ServiceClient1;
 using ServiceClient2;
 namespace TestSC
@@ -7,12 +12,7 @@ namespace TestSC
     {
         static void Main(string[] args)
         {
-            Processor pr = new Processor();
-            pr.LoadStudent();
 
-            ClassProcessor c = new ClassProcessor();
-            c.LoadClass();
-            
         }
     }
 }
