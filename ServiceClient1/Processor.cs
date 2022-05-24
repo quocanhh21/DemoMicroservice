@@ -1,23 +1,43 @@
-﻿using RestSharp;
-using System;
-using System.Configuration;
+﻿using System;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace ServiceClient1
 {
     public class Processor
     {
-       public void LoadStudent()
+        public static async Task<StudentModel> LoadStudent(int idStudent = 1)
         {
-            string url = ConfigurationManager.AppSettings["host"]; // from api microservice1
+            // from appsetting.json microservice2
+            string urlService1 = Common.Service();
+            string url = "";
 
-            var client = new RestClient(url);
+            if (idStudent > 0)
+            {
+                url = $"{urlService1}api/Student/{idStudent}";
+            }
+            else
+            {
+                url = $"{urlService1}api/Student";
+            }
 
-            var request = new RestRequest();
+            HttpClient client = new HttpClient();
 
-            var response = client.Get(request);
+            //GET 
+            using (HttpResponseMessage response = await client.GetAsync(url))
+            {
+                StudentModel student = null;
+                if (response.IsSuccessStatusCode)
+                {
+                    student = await response.Content.ReadAsAsync<StudentModel>();
 
-            Console.WriteLine(response.Content.ToString());
-
+                    return student;
+                }
+                else
+                {
+                    throw new Exception(response.ReasonPhrase);
+                }
+            }
         }
     }
 }
