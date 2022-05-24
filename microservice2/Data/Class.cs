@@ -1,6 +1,4 @@
-﻿using microservice2.Model;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace microservice2.Data
 {
