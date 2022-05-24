@@ -1,13 +1,8 @@
 ﻿using microservice1.Data;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 using ServiceClient2;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace microservice1.Controllers
@@ -26,7 +21,7 @@ namespace microservice1.Controllers
         [HttpGet]
         public async Task<ActionResult<List<Student>>> Get()
         {
-            //ClassProcessor.LoadClass();
+            CallingWebApi.RunAsync();
             return Ok(await _context.Students.ToListAsync());
         }
 
