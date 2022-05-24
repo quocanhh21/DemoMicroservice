@@ -1,9 +1,9 @@
 ﻿using Microsoft.Extensions.Configuration;
 using System.IO;
 
-namespace ServiceClient2
+namespace ServiceClient1
 {
-    public static class Common
+    public class Common
     {
         public static string Service()
         {
