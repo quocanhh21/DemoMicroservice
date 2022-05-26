@@ -1,0 +1,40 @@
+{
+  "ReRoutes": [
+    {
+      "DownstreamPathTemplate": "/api/Student",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "5000"
+        }
+      ],
+      "UpstreamPathTemplate": "/Student",
+      "Key": "Student"
+    },
+    {
+      "DownstreamPathTemplate": "/api/Class",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "11271"
+        }
+      ],
+      "UpstreamPathTemplate": "/Class",
+      "Key": "Class"
+    }
+  ],
+  "Aggregates": [
+    {
+      "ReRouteKeys": [
+        "Class",
+        "Student"
+      ],
+      "UpstreamPathTemplate": "/ClassWithStudents"
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost:65021"
+  }
+}
