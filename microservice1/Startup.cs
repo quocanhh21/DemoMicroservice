@@ -1,3 +1,4 @@
+using Confluent.Kafka;
 using microservice1.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -21,11 +22,22 @@ namespace microservice1
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            string bootstrapServers = Configuration.GetSection("consumer:bootstrapservers").Get<string>();
+            string topic = Configuration.GetSection("consumer:topic").Get<string>();
+            string groupId = Configuration.GetSection("consumer:groupid").Get<string>();
+            var consumerConfig = new ConsumerConfig
+            {
+                GroupId= groupId,
+                BootstrapServers = bootstrapServers,
+                AutoOffsetReset= AutoOffsetReset.Earliest
+            };
+
+            //Configuration.Bind("consumer", consumerConfig);
             services.AddDbContext<StudentDbContext>(options =>
             options.UseSqlServer(
                 Configuration.GetConnectionString("DefaultConnection")
                 ));
-
+            services.AddSingleton<ConsumerConfig>(consumerConfig);
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

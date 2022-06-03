@@ -1,7 +1,9 @@
-﻿using microservice2.Data;
+﻿using Confluent.Kafka;
+using microservice2.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using ServiceClient1;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -12,10 +14,12 @@ namespace microservice2.Controllers
     public class ClassController : ControllerBase
     {
         private readonly ClassDbContext _context;
+        private ProducerConfig _config;
 
-        public ClassController(ClassDbContext context)
+        public ClassController(ClassDbContext context, ProducerConfig config)
         {
             _context = context;
+            _config = config;
         }
 
         [HttpGet]
@@ -34,6 +38,25 @@ namespace microservice2.Controllers
                 return BadRequest("Student not found.");
             }
             return Ok(cl);
+        }
+
+        [HttpPost("send")]
+        public async Task<ActionResult> Get(string topic,Class cl)
+        {
+            string serializedCl = JsonConvert.SerializeObject(cl);
+            try
+            {
+                using (var producer = new ProducerBuilder<Null, string>(_config).Build())
+                {
+                    await producer.ProduceAsync(topic, new Message<Null, string> { Value = serializedCl });
+                    producer.Flush(TimeSpan.FromSeconds(10));
+                    return Ok(true);
+                }
+            }
+            catch (ProduceException<string,Class> ex)
+            {
+                return BadRequest($"Fail: {ex.Error.Reason}");
+            }
         }
 
         [HttpPost]

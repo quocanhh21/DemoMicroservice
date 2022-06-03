@@ -1,3 +1,4 @@
+using Confluent.Kafka;
 using microservice2.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -21,10 +22,14 @@ namespace microservice2
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var producerConfig = new ProducerConfig();
+            Configuration.Bind("producer", producerConfig);
+
             services.AddDbContext<ClassDbContext>(options =>
             options.UseSqlServer(
                 Configuration.GetConnectionString("DefaultConnection")
                 ));
+            services.AddSingleton<ProducerConfig>(producerConfig);
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

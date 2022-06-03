@@ -1,6 +1,10 @@
-﻿using microservice1.Data;
+﻿using Confluent.Kafka;
+using microservice1.Data;
+using microservice1.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -11,10 +15,12 @@ namespace microservice1.Controllers
     public class StudentController : ControllerBase
     {
         private readonly StudentDbContext _context;
+        private ConsumerConfig _config;
 
-        public StudentController(StudentDbContext context)
+        public StudentController(StudentDbContext context, ConsumerConfig config)
         {
             _context = context;
+            _config = config;
         }
 
         [HttpGet]
@@ -33,6 +39,34 @@ namespace microservice1.Controllers
                 return BadRequest("Student not found.");
             }
             return Ok(student);
+        }
+
+        [HttpPost("send")]
+        public void GetMessage(string topic)
+        {
+            using (var c = new ConsumerBuilder<Null, string>(_config).Build())
+            {
+                c.Subscribe(topic);
+                try
+                {
+                    while (true)
+                    {
+                        try
+                        {
+                            var cr = c.Consume();
+                            Class cl = JsonConvert.DeserializeObject<Class>(cr.Message.Value);
+                        }
+                        catch (ConsumeException ex)
+                        {
+                            Console.WriteLine($"Error occured: {ex.Error.Reason}");
+                        }
+                    }
+                }
+                catch (KafkaException ex)
+                {
+                    throw new ArgumentException(ex.Message.ToString());
+                }
+            }
         }
 
         [HttpPost]
